@@ -1,3 +1,9 @@
+const Sequelize = require('sequelize');
+const { VIRTUAL, DECIMAL, STRING, UUID, UUIDV4 } = Sequelize;
+
+const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/acme_cms_db');
+
+//starting code
 const mapAndSave = (pages)=> Promise.all(pages.map( page => PageTransitionEvent.create(page)));
 
 const syncAndSeed = async()=> {
