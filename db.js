@@ -50,3 +50,11 @@ syncAndSeed()
     hier = await history.hierarchy();
     console.log(hier.map( page => page.title)); //['About Our History', 'About', 'Home Page']
   });
+
+  module.exports = {
+    syncAndSeed,
+    conn,
+    models: {
+      Page
+    }
+  };
