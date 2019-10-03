@@ -35,10 +35,16 @@ const syncAndSeed = async()=> {
   const [ team, history, phone, fax ] = await mapAndSave(pages);
 };
 
+// methods
+Page.findHomePage = async function(){
+  return await this.findOne({ where: {title: 'Home Page'}});
+}
+
 syncAndSeed()
   .then(async()=> {
     const home = await Page.findHomePage();
     console.log(home.title); //Home Page
+    /*
     const homeChildren = await home.findChildren();
     console.log(homeChildren.map( page => page.title)); //[About, Contact]
     const fax = await Page.findOne({ where: {title: 'Fax' }});
@@ -49,6 +55,7 @@ syncAndSeed()
     const history = await Page.findOne({ where: { title: 'About Our History' }});
     hier = await history.hierarchy();
     console.log(hier.map( page => page.title)); //['About Our History', 'About', 'Home Page']
+    */
   });
 
   module.exports = {

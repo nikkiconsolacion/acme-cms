@@ -18,6 +18,12 @@ app.get('/api/pages', async(req, res, next)=> {
   }
 });
 
+app.get('/api/pages/:id/children', async(req, res, next)=> {
+  Page.findAll({ where: { parentId: req.params.id }})
+    .then( pages => res.send(pages))
+    .catch(next);
+});
+
 db.syncAndSeed()
   .then(()=> {
     app.listen(port, ()=> console.log(`listening on port ${port}`))
