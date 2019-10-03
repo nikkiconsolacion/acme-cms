@@ -38,15 +38,19 @@ const syncAndSeed = async()=> {
 // methods
 Page.findHomePage = async function(){
   return await this.findOne({ where: {title: 'Home Page'}});
-}
+};
+
+Page.prototype.findChildren = async function(){
+  return await Page.findAll({ where: { parentId: this.id }})
+};
 
 syncAndSeed()
   .then(async()=> {
     const home = await Page.findHomePage();
     console.log(home.title); //Home Page
-    /*
     const homeChildren = await home.findChildren();
     console.log(homeChildren.map( page => page.title)); //[About, Contact]
+    /*
     const fax = await Page.findOne({ where: {title: 'Fax' }});
     console.log(fax.title); //Fax
     //hierarch returns the page, parentPage, parent's Parent.. etc..
