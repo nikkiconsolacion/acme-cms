@@ -3,6 +3,13 @@ const { VIRTUAL, DECIMAL, STRING, UUID, UUIDV4 } = Sequelize;
 
 const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/acme_cms_db');
 
+// model
+const Page = conn.define("page", {
+  title: STRING
+});
+
+//Page.belongsTo(Parent); //puts parentId in Page
+
 //starting code
 const mapAndSave = (pages)=> Promise.all(pages.map( page => PageTransitionEvent.create(page)));
 
