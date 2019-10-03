@@ -50,12 +50,13 @@ syncAndSeed()
     console.log(home.title); //Home Page
     const homeChildren = await home.findChildren();
     console.log(homeChildren.map( page => page.title)); //[About, Contact]
-    /*
     const fax = await Page.findOne({ where: {title: 'Fax' }});
     console.log(fax.title); //Fax
     //hierarch returns the page, parentPage, parent's Parent.. etc..
+
     let hier = await fax.hierarchy();
     console.log(hier.map( page => page.title)); //[ 'Fax', 'Contact', 'Home' ]
+    /*
     const history = await Page.findOne({ where: { title: 'About Our History' }});
     hier = await history.hierarchy();
     console.log(hier.map( page => page.title)); //['About Our History', 'About', 'Home Page']
