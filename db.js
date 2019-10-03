@@ -5,13 +5,18 @@ const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/acm
 
 // model
 const Page = conn.define("page", {
+  id: {
+    type: UUID,
+    primaryKey: true,
+    defaultValue: UUIDV4
+  },
   title: STRING
 });
 
-//Page.belongsTo(Parent); //puts parentId in Page
+Page.belongsTo(Page, { as: 'parent'}); //puts parentId in Page
 
 //starting code
-const mapAndSave = (pages)=> Promise.all(pages.map( page => PageTransitionEvent.create(page)));
+const mapAndSave = (pages)=> Promise.all(pages.map( page => Page.create(page)));
 
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
