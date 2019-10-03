@@ -44,6 +44,10 @@ Page.prototype.findChildren = async function(){
   return await Page.findAll({ where: { parentId: this.id }})
 };
 
+// Page.prototype.hierarchy = async function(){
+
+// }
+
 syncAndSeed()
   .then(async()=> {
     const home = await Page.findHomePage();
